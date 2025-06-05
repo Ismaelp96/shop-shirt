@@ -7,5 +7,6 @@ export interface FetchProductsResponse {
 
 export async function fetchProducts() {
 	const res = await api.get<FetchProductsResponse>(`/products?populate=image`);
+
 	return res.data.data;
 }

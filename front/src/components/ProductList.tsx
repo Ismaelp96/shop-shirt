@@ -21,20 +21,18 @@ export function ProductList() {
 	useEffect(() => {
 		async function loadProducts() {
 			const products = await fetchProducts();
+			console.log(products);
 			setListProducts(products);
 		}
-
 		loadProducts();
 	}, []);
 
 	return (
 		<div ref={sliderRef} className='keen-slider'>
 			{listProducts.map((product) => {
-				const getImageUrl = (product: Product) => {
-					const baseUrl = process.env.NEXT_PUBLIC_API_URL;
-					const imageUrl = `${baseUrl}${product.image.url}`;
-					return imageUrl;
-				};
+				const imageUrl = product.image?.url
+					? `${process.env.NEXT_PUBLIC_API_URL}${product.image.url}`
+					: '/placeholder.jpg';
 				return (
 					<div key={product.documentId} className=' keen-slider__slide'>
 						<Link
@@ -42,11 +40,12 @@ export function ProductList() {
 							prefetch={false}
 							className='bg-gradient-to-b from-green-custom to-purple-custom rounded-[8px] relative overflow-hidden flex items-center justify-center group '>
 							<Image
-								src={getImageUrl(product)}
+								src={imageUrl}
 								width={520}
 								height={480}
 								alt={product.name}
 								className=' object-cover'
+								priority
 							/>
 							<footer className='flex items-center justify-between bg-gray-700/90 absolute bottom-1 right-1 left-1 p-8 rounded-md translate-y-[110%] group-hover:translate-y-[0%] transition-all ease-in-out duration-200'>
 								<p className='text-gray-100 text-xl font-bold'>
