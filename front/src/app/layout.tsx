@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Roboto } from 'next/font/google';
 import './globals.css';
+import { Header } from '@/components/Header';
 
 const roboto = Roboto({
 	variable: '--font-geist-sans',
@@ -22,6 +23,7 @@ export default function RootLayout({
 		<html lang='en'>
 			<body
 				className={`${roboto.className}  antialiased  text-gray-100 flex flex-col items-start  min-h-screen box-border p-0 m-0`}>
+				<Header />
 				{children}
 			</body>
 		</html>

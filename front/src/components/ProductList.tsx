@@ -18,12 +18,12 @@ export function ProductList() {
 		},
 	});
 	const [listProducts, setListProducts] = useState<Product[]>([]);
+
 	useEffect(() => {
 		async function loadProducts() {
 			const products = await fetchProducts();
 			setListProducts(products);
 		}
-
 		loadProducts();
 	}, []);
 
@@ -36,17 +36,17 @@ export function ProductList() {
 					return imageUrl;
 				};
 				return (
-					<div key={product.documentId} className=' keen-slider__slide'>
+					<div key={product.documentId} className='keen-slider__slide'>
 						<Link
-							href={`/product/${product.slug}`}
+							href={`/product/${product.documentId}`}
 							prefetch={false}
 							className='bg-gradient-to-b from-green-custom to-purple-custom rounded-[8px] relative overflow-hidden flex items-center justify-center group '>
 							<Image
 								src={getImageUrl(product)}
 								width={520}
-								height={480}
+								height={520}
 								alt={product.name}
-								className=' object-cover'
+								className='object-cover'
 							/>
 							<footer className='flex items-center justify-between bg-gray-700/90 absolute bottom-1 right-1 left-1 p-8 rounded-md translate-y-[110%] group-hover:translate-y-[0%] transition-all ease-in-out duration-200'>
 								<p className='text-gray-100 text-xl font-bold'>
